@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Назва від користувачаи</title>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+    :root {
+        --primary-color: #4888ee;
+        --secondary-color: #09123c;
+        --highlight-color: #c220ef;
+        --accent-color: #b801fb;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--secondary-color);
+        color: #000;
+    }
+
+    .menu {
+        background-color: var(--primary-color);
+        color: #fff;
+        padding: 0px 20px;
+        text-align: left;
+    }
+
+    .menu a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 10px;
+        padding: 10px 20px;
+        background-color: var(--primary-color);
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .menu a:hover {
+        background-color: #c220ef;
+        color: #000;
+    }
+
+    .catalog {
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .main-slider {
+        width: 100%;
+        margin-bottom: 5px;
+        position: relative;
+    }
+
+    .main-slider img {
+        width: 80%;
+        height: auto;
+        border-radius: 5px;
+        margin-left: 10%;
+    }
+
+    .slide-caption {
+        position: absolute;
+        bottom: 20px;
+        left: 150px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .thumbnail-gallery {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 70px;
+    }
+
+    .thumbnail-gallery .thumbnail {
+        width: 100px;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    .thumbnail-gallery .thumbnail img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+    }
+
+    .product-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .product-item {
+        width: 150px;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .product-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .product-item h3,
+    .product-item p.price {
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+
+    .search-filter {
+        position: fixed;
+        top: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        z-index: 1000;
+        background-color: #fff;
+        padding: 5px;
+        text-align: left;
+        border-left: 1px solid #ccc;
+    }
+    
+    .search-filter input[type="text"],
+    .search-filter input[type="number"],
+    .search-filter select {
+        margin-right: 10px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 1px;
+    }
+    
+    .search-filter select {
+        padding: 5px;
+    }
+
+    #price-slider {
+        width: 100px;
+        margin-right: 10px;
+    }
+
+    #price-range {
+        margin: 0 10px;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .pagination button {
+        background-color: var(--primary-color);
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        margin: 0 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .pagination button:hover {
+        background-color: var(--highlight-color);
+        color: #000;
+    }
+
+    .pagination .active {
+        background-color: var(--highlight-color);
+       
+        color: #000;
+    }
+    
+    .pagination .active {
+        background-color: var(--accent-color); 
+    }
+
+</style>
+</head>
+<body>
+    <div class="menu">
+        <img src="photos/logo_without_text.png" alt="Головна" style="vertical-align: middle; width: 40px; height: 40px; margin-right: 10px;">
+        <a href="#">Головна</a>
+        <a href="#">Назва від користувачаи</a>
+        <a href="#">Про нас</a>
+        <a href="#">Log in</a>
+        <a href="#">Sign up</a>
+    </div>
+    
+    <div class="search-filter">
+        <input type="text" id="search-input" placeholder="Пошук...">
+        <select id="brand-filter">
+            <option value="">Усі бренди</option>
+            <option value="brand1">Бренд 1</option>
+            <option value="brand2">Бренд 2</option>
+        </select>
+        <div id="price-slider"></div>
+        <span id="price-range"></span>
+    </div>
+
+    <div class="catalog"> 
+
+        <div class="main-slider">
+            <div>
+                <img src="photos/445805435_973452864782545_1919940268373131944_n.jpg" alt="Назва від користувача">
+                <div class="slide-caption">Назва від користувача 1</div>
+            </div>
+            <div>
+                <img src="photos/440466045_961042752690223_3889372357511904977_n.jpg" alt="Назва від користувача 1">
+                <div class="slide-caption">Назва від користувача 2</div>
+            </div>
+            <div>
+                <img src="photos/440436602_965270898934075_4629102547835949120_n.jpg" alt="Назва від користувача 2">
+                <div class="slide-caption">Назва від користувача 3</div>
+            </div>
+            <div>
+                <img src="photos/438299310_953974280063737_6397410325456836797_n.jpg" alt="Назва від користувача">
+                <div class="slide-caption">Назва від користувача 4</div>
+            </div>
+            <div>
+                <img src="photos/440424285_956061173188381_2912799091862135507_n.jpg" alt="Назва від користувача 1">
+                <div class="slide-caption">Назва від користувача 5</div>
+            </div>
+            <div>
+                <img src="photos/445805435_973452864782545_1919940268373131944_n.jpg" alt="Назва від користувача 2">
+                <div class="slide-caption">Назва від користувача 6</div>
+            </div>
+            <div>
+                <img src="photos/442497384_970476645080167_8960980299657423603_n.jpg" alt="Назва від користувача 2">
+                <div class="slide-caption">Назва від користувача 7</div>
+            </div>
+        </div>
+
+        <div class="thumbnail-gallery">
+            <div class="thumbnail" data-index="0">
+                <img src="photos/445805435_973452864782545_1919940268373131944_n.jpg" alt="Назва від користувача">
+            </div>
+            <div class="thumbnail" data-index="1">
+                <img src="photos/438260905_959772726150559_1251509006368459519_n.jpg" alt="Назва від користувача 1">
+            </div>
+            <div class="thumbnail" data-index="2">
+                <img src="photos/442492649_973452931449205_1397452959168747711_n.jpg" alt="Назва від користувача 2">
+            </div>
+            <div class="thumbnail" data-index="3">
+                <img src="photos/438299310_953974280063737_6397410325456836797_n.jpg" alt="Назва від користувача">
+            </div>
+            <div class="thumbnail" data-index="4">
+                <img src="photos/440424285_956061173188381_2912799091862135507_n.jpg" alt="Назва від користувача 1">
+            </div>
+            <div class="thumbnail" data-index="5">
+                <img src="photos/442492649_973452931449205_1397452959168747711_n.jpg" alt="Назва від користувача">
+            </div>
+            <div class="thumbnail" data-index="6">
+                <img src="photos/440466045_961042752690223_3889372357511904977_n.jpg" alt="Назва від користувача 2">
+            </div>
+        </div>
+
+        <div class="product-grid" id="product-grid">
+            <div class="product-item" data-price="1000">
+                <img src="photos/445805435_973452864782545_1919940268373131944_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 1500₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/438260905_959772726150559_1251509006368459519_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 1000₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/440424285_956061173188381_2912799091862135507_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 500₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/438299310_953974280063737_6397410325456836797_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 1200₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/440424285_956061173188381_2912799091862135507_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 1150₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/442492649_973452931449205_1397452959168747711_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 2000₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/438260905_959772726150559_1251509006368459519_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 700₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/445805435_973452864782545_1919940268373131944_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 1000₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/438299310_953974280063737_6397410325456836797_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 1500₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/440424285_956061173188381_2912799091862135507_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 1000₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/442492649_973452931449205_1397452959168747711_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 900₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/438260905_959772726150559_1251509006368459519_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 2000₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/442497384_970476645080167_8960980299657423603_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 1500₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/438299310_953974280063737_6397410325456836797_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 1250₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/440424285_956061173188381_2912799091862135507_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 1200₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/442492649_973452931449205_1397452959168747711_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 1100₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/438260905_959772726150559_1251509006368459519_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 1900₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/442497384_970476645080167_8960980299657423603_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 1700₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/438299310_953974280063737_6397410325456836797_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 1000₴</p>
+            </div>
+            <div class="product-item" data-price="1000">
+                <img src="photos/440424285_956061173188381_2912799091862135507_n.jpg" alt="Назва від користувача">
+                <h3>Назва Назва від користувачаа</h3>
+                <p class="price">Ціна: 2000₴</p>
+            </div>
+        </div>
+
+        <div class="pagination" id="pagination"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.main-slider').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                arrows: false,
+                fade: true,
+                asNavFor: '.thumbnail-gallery'
+            });
+
+            $('.thumbnail-gallery').slick({
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                asNavFor: '.main-slider',
+                dots: false,
+                centerMode: true,
+                focusOnSelect: true
+            });
+
+            $('.thumbnail-gallery .thumbnail').on('click', function(){
+                var index = $(this).data('index');
+                $('.main-slider').slick('slickGoTo', index);
+            });
+
+            const itemsPerPage = 9; 
+            const productGrid = $('#product-grid');
+            const productItems = productGrid.find('.product-item');
+            const pagination = $('#pagination');
+            const totalPages = Math.ceil(productItems.length / itemsPerPage);
+
+            function showPage(page) {
+                productItems.hide();
+                productItems.slice((page - 1) * itemsPerPage, page * itemsPerPage).show();
+                pagination.find('button').removeClass('active');
+                pagination.find(`button[data-page="${page}"]`).addClass('active');
+            }
+
+            for (let i = 1; i <= totalPages; i++) {
+                pagination.append(`<button data-page="${i}">${i}</button>`);
+            }
+
+            pagination.on('click', 'button', function() {
+                const page = $(this).data('page');
+                showPage(page);
+            });
+
+            showPage(1);
+
+            const minPrice = Math.min(...productItems.map((i, el) => $(el).data('price')).get());
+            const maxPrice = Math.max(...productItems.map((i, el) => $(el).data('price')).get());
+
+            $(function() {
+                $("#price-slider").slider({
+                  range: true,
+                  min: 0, 
+                  max: 2000, 
+                  values: [0, 2000],
+                  slide: function(event, ui) {
+                    $("#price-range").text("$" + ui.values[0] + " - $" + ui.values[1]);
+                  }
+                });
+                $("#price-range").text("$" + $("#price-slider").slider("values", 0) +
+                  " - $" + $("#price-slider").slider("values", 1));
+              });
+
+            function filterProducts(min, max) {
+                productItems.each(function() {
+                    const price = $(this).data('price');
+                    if (price >= min && price <= max) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+
+                showPage(1);
+            }
+        });
+    </script>
+</body>
+</html>
